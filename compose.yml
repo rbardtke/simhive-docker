@@ -1,0 +1,53 @@
+# Simhive in Docker — https://github.com/rbardtke/simhive-docker
+#
+#   cp .env.example .env   →  put your token in it  →  docker compose up -d
+#
+# SIMHIVE_INTERFACE=true : your own Localbots page on port 4747 (sims go to
+#                          the pool) and this machine's cores lent to the pool
+# SIMHIVE_INTERFACE=false: cores only, nothing served
+#
+# Nothing is compiled: SimulationCraft is fetched from the release channel at
+# the exact commit the pool runs (35 MB, first start) and follows the pool
+# from then on. Update: docker compose pull && docker compose up -d
+services:
+  simhive:
+    image: ghcr.io/rbardtke/simhive:latest
+    container_name: simhive
+    restart: unless-stopped
+    ports:
+      - "${SIMHIVE_PORT:-4747}:4747"   # unreachable when SIMHIVE_INTERFACE=false
+    volumes:
+      - simhive-simc:/opt/simc               # simc builds (the current and the previous)
+      - simhive-cache:/app/data/cache        # game tables (60 MB, interface only)
+      - simhive-history:/app/data/history    # your saved sims
+      - simhive-config:/app/data/config      # this machine's pool settings
+    environment:
+      LOCALBOTS_INTERFACE: ${SIMHIVE_INTERFACE:-true}
+      LOCALBOTS_POOL: ${SIMHIVE_POOL:-https://simhive.sidian.app}
+      LOCALBOTS_POOL_TOKEN: ${SIMHIVE_TOKEN:?put SIMHIVE_TOKEN=<your token> in .env — see .env.example}
+      LOCALBOTS_NODE_NAME: ${SIMHIVE_NAME:-}
+      BLIZZARD_CLIENT_ID: ${BLIZZARD_CLIENT_ID:-}
+      BLIZZARD_CLIENT_SECRET: ${BLIZZARD_CLIENT_SECRET:-}
+    # Other people's characters get simmed on this machine. The engine keeps
+    # simc from being *asked* to touch files or the network; this keeps it from
+    # being *able* to: the filesystem is read-only except the volumes above,
+    # /tmp and the job directory.
+    read_only: true
+    tmpfs:
+      - /tmp:size=1g,mode=1777
+      - /app/jobs:size=1g,uid=1000,gid=1000
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 512
+    mem_limit: 6g
+    # keep some cores for yourself, e.g. cpuset: "0-5" — the thread slider in
+    # Settings → Pool is the softer way
+    # cpuset: "0-5"
+
+volumes:
+  simhive-simc:
+  simhive-cache:
+  simhive-history:
+  simhive-config:
