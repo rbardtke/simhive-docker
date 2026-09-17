@@ -1,3 +1,5 @@
+<p align="center"><img src="brand/simhive-lockup-dark-1200.png" alt="SimHive" width="420"></p>
+
 # Simhive in Docker
 
 [Simhive](https://simhive.app) is a free simming network for World of
