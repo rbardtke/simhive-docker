@@ -1,6 +1,6 @@
 # Simhive in Docker
 
-[Simhive](https://simhive.sidian.app) is a free simming network for World of
+[Simhive](https://simhive.app) is a free simming network for World of
 Warcraft: everyone's sims run on everyone's machines. Most people use the
 desktop app; this is for a server, a NAS or a spare Linux box — one container,
 one switch:
@@ -16,7 +16,7 @@ from then on.
 
 ## Install
 
-You need Docker with the Compose plugin (`curl -fsSL https://get.docker.com | sh` on a fresh Debian/Ubuntu) on x86-64 Linux, and a member token — one per person, the same on every machine you own: https://simhive.sidian.app/join (or in the app: Settings → Pool → Get a token).
+You need Docker with the Compose plugin (`curl -fsSL https://get.docker.com | sh` on a fresh Debian/Ubuntu) on x86-64 Linux, and a member token — one per person, the same on every machine you own: https://simhive.app/join (or in the app: Settings → Pool → Get a token).
 
 ```bash
 git clone https://github.com/rbardtke/simhive-docker.git && cd simhive-docker

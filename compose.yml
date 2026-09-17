@@ -23,7 +23,7 @@ services:
       - simhive-config:/app/data/config      # this machine's pool settings
     environment:
       LOCALBOTS_INTERFACE: ${SIMHIVE_INTERFACE:-true}
-      LOCALBOTS_POOL: ${SIMHIVE_POOL:-https://simhive.sidian.app}
+      LOCALBOTS_POOL: ${SIMHIVE_POOL:-https://simhive.app}
       LOCALBOTS_POOL_TOKEN: ${SIMHIVE_TOKEN:?put SIMHIVE_TOKEN=<your token> in .env — see .env.example}
       LOCALBOTS_NODE_NAME: ${SIMHIVE_NAME:-}
       BLIZZARD_CLIENT_ID: ${BLIZZARD_CLIENT_ID:-}
