@@ -18,7 +18,7 @@ from then on.
 
 ## Install
 
-You need Docker with the Compose plugin (`curl -fsSL https://get.docker.com | sh` on a fresh Debian/Ubuntu) on x86-64 Linux, and a member token — one per person, the same on every machine you own: https://simhive.app/join (or in the app: Settings → Pool → Get a token).
+You need Docker with the Compose plugin (`curl -fsSL https://get.docker.com | sh` on a fresh Debian/Ubuntu) on Linux, x86-64 or ARM64 (a cloud box, a Raspberry Pi 5, a phone on postmarketOS), and a member token — one per person, the same on every machine you own: https://simhive.app/join (or in the app: Settings → Pool → Get a token).
 
 ```bash
 git clone https://github.com/rbardtke/simhive-docker.git && cd simhive-docker
